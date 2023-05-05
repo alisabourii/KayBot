@@ -1,9 +1,11 @@
 int trig = 9;
 int echo = 8;
 
+int ENA = 10;
 int mtrA1 = 2;
 int mtrA2 = 3;
 
+int ENB = 11;
 int mtrB1 = 4;
 int mtrB2 = 5;
 
@@ -12,6 +14,8 @@ void setup() {
   pinMode(trig, OUTPUT);
   pinMode(echo, INPUT);
 
+  pinMode(ENA, OUTPUT);
+  pinMode(ENB, OUTPUT);
   pinMode(mtrA1, OUTPUT);
   pinMode(mtrA2, OUTPUT);
   pinMode(mtrB1, OUTPUT);
@@ -27,15 +31,19 @@ void loop() {
   ileri();
 
   if(msf <= 15 && sayac%2 == 0){
-    sag();}
+    sayac++;
+    //sag();
+    dur();}
     
   else if(msf <= 15 && sayac%2 == 1){
-    sol();}
+    sayac++;
+    //sol();
+    dur();}
 
   //delay(500);
-  /*ileri();
+  /*sag();
   delay(5000);
-  geri();
+  sol();
   delay(5000);*/
 }
 
@@ -49,33 +57,44 @@ int Mesafe(){
 }
 
 void ileri(){
+  analogWrite(ENA , 200);
   digitalWrite(mtrA1,1);
   digitalWrite(mtrA2,0);
 
+  analogWrite(ENB , 200);
   digitalWrite(mtrB1,1);
   digitalWrite(mtrB2,0);
 }
 
-void geri(){
+/*void geri(){
   digitalWrite(mtrA1,0);
   digitalWrite(mtrA2,1);
 
   digitalWrite(mtrB1,0);
   digitalWrite(mtrB2,1);
-}
+}*/
 
 void sag(){
   digitalWrite(mtrA1,1);
   digitalWrite(mtrA2,0);
 
   digitalWrite(mtrB1,0);
-  digitalWrite(mtrB2,1);
+  digitalWrite(mtrB2,0);
 }
 
 void sol(){
   digitalWrite(mtrA1,0);
-  digitalWrite(mtrA2,1);
+  digitalWrite(mtrA2,0);
 
   digitalWrite(mtrB1,1);
+  digitalWrite(mtrB2,0);
+}
+
+
+void dur(){
+  digitalWrite(mtrA1,0);
+  digitalWrite(mtrA2,0);
+
+  digitalWrite(mtrB1,0);
   digitalWrite(mtrB2,0);
 }
